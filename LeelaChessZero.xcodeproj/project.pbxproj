@@ -556,7 +556,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1010;
-				ORGANIZATIONNAME = d0;
+				ORGANIZATIONNAME = "Leela Chess Zero";
 				TargetAttributes = {
 					CDAE718921DD91A000358035 = {
 						CreatedOnToolsVersion = 10.1;
