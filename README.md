@@ -4,11 +4,11 @@ A framework built for iOS to allow use of LeelaChessZero (lc0) chess engine.
 
 See the project [lczero.org](https://lczero.org) code here: [GITHUB](https://github.com/LeelaChessZero/)
 
-The main work needed here was crossing the languange boundaries. 
+The majority of the work needed here was crossing the languange boundaries. 
 
- * Leela is in C++, so I used the `uciloop.cc` as a place to bind to lc0 callbacks -> `LeelaConnect`.
- * C++ doesn't play nice with Objective-C, so I used Objective-C++ as the pass through language. -> `EngineBridge.mm`
- * LeelaSwift.swift uses the EngineBridge and presents blocks to facilitate callbacks.
+ * Leela is in C++, so I used `uciloop.cc` as a template for binding to lc0 callbacks called `LeelaConnect`.
+ * C++ doesn't play nice with Objective-C, so I used Objective-C++ as the pass through language. `EngineBridge.mm`
+ * `LeelaSwift.swift` uses the EngineBridge and presents blocks to facilitate callbacks.
  
 How it works.
 
