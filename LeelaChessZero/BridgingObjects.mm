@@ -25,15 +25,57 @@
  Program grant you additional permission to convey the resulting work.
  */
 
-#import <UIKit/UIKit.h>
-
-//! Project version number for LeelaChessZero.
-FOUNDATION_EXPORT double LeelaChessZeroVersionNumber;
-
-//! Project version string for LeelaChessZero.
-FOUNDATION_EXPORT const unsigned char LeelaChessZeroVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like
-#import <LeelaChessZero/EngineBridge.h>
+#import "BridgingObjects.h"
 
 
+@implementation LCZero_GoParameters
+
+@synthesize wtime;
+@synthesize btime;
+@synthesize winc;
+@synthesize binc;
+@synthesize movestogo;
+@synthesize depth;
+@synthesize nodes;
+@synthesize movetime;
+@synthesize infinite;
+@synthesize searchmoves;
+@synthesize ponder;
+
+@end
+
+@implementation LCZero_BestMoveInfo
+
+@synthesize bestmove;
+@synthesize ponder;
+@synthesize player;
+@synthesize game_id;
+@synthesize is_black;
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"LCZero_BestMoveInfo: %@ %@ %ld %ld %ld", bestmove, ponder, (long)player, (long)game_id, (long)is_black];
+}
+
+@end
+
+@implementation LCZero_Thought
+
+@synthesize line;
+@synthesize player;
+@synthesize game_id;
+@synthesize is_black;
+@synthesize depth;
+@synthesize seldepth;
+@synthesize time;
+@synthesize nodes;
+@synthesize score;
+@synthesize hashfull;
+@synthesize nps;
+@synthesize tb_hits;
+@synthesize multipv;
+
+-(NSString *)description {
+    return [NSString stringWithFormat:@"LCZero_Thought: %@ %ld %ld %ld", line, (long)player, (long)game_id, (long)is_black];
+}
+
+@end

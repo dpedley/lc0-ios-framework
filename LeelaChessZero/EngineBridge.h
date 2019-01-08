@@ -25,15 +25,29 @@
  Program grant you additional permission to convey the resulting work.
  */
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "BridgingObjects.h"
 
-//! Project version number for LeelaChessZero.
-FOUNDATION_EXPORT double LeelaChessZeroVersionNumber;
+NS_ASSUME_NONNULL_BEGIN
 
-//! Project version string for LeelaChessZero.
-FOUNDATION_EXPORT const unsigned char LeelaChessZeroVersionString[];
+typedef void (^LCZero_BestMoveCompletion)(LCZero_BestMoveInfo *bestMoveInfo);
+typedef void (^LCZero_ThoughtCompletion)(NSArray *thoughts); // Array of LCZero_Thought
 
-// In this header, you should import all the public headers of your framework using statements like
-#import <LeelaChessZero/EngineBridge.h>
+@interface LCZero_EngineBridge : NSObject
 
+@property (nonatomic, copy) LCZero_BestMoveCompletion bestMoveBlock;
+@property (nonatomic, copy) LCZero_ThoughtCompletion thoughtBlock;
 
+- (void)setupWeights:(NSString *)filePath;
+- (void)sendUCI;
+- (void)sendIsReady;
+- (void)sendNewGame;
+- (void)sendSetOption:(NSString *)key value:(NSString *)value context:(NSString *)context;
+- (void)sendPosition:(NSString *)FEN moves:(NSArray *)moveStrings;
+- (void)sendGo:(LCZero_GoParameters *)goParams;
+- (void)sendPonderHit;
+- (void)sendStop;
+
+@end
+
+NS_ASSUME_NONNULL_END

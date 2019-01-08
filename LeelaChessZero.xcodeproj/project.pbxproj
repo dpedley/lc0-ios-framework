@@ -7,9 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD82464D21E420B5002818C0 /* LeelaConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CD82464921E420B5002818C0 /* LeelaConnect.cpp */; };
+		CD82464E21E420B5002818C0 /* LeelaConnect.hpp in Headers */ = {isa = PBXBuildFile; fileRef = CD82464A21E420B5002818C0 /* LeelaConnect.hpp */; };
+		CD82464F21E420B5002818C0 /* EngineBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = CD82464B21E420B5002818C0 /* EngineBridge.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD82465021E420B5002818C0 /* EngineBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD82464C21E420B5002818C0 /* EngineBridge.mm */; };
+		CD82465321E42BEA002818C0 /* BridgingObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = CD82465121E42BEA002818C0 /* BridgingObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CD82465421E42BEA002818C0 /* BridgingObjects.mm in Sources */ = {isa = PBXBuildFile; fileRef = CD82465221E42BEA002818C0 /* BridgingObjects.mm */; };
 		CDAE719421DD91A000358035 /* LeelaChessZero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDAE718A21DD91A000358035 /* LeelaChessZero.framework */; };
 		CDAE719921DD91A000358035 /* LeelaChessZeroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDAE719821DD91A000358035 /* LeelaChessZeroTests.swift */; };
 		CDAE719B21DD91A000358035 /* LeelaChessZero.h in Headers */ = {isa = PBXBuildFile; fileRef = CDAE718D21DD91A000358035 /* LeelaChessZero.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CDB1407D21E15D420090572B /* libprotobuf-lite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB1407C21E15D420090572B /* libprotobuf-lite.a */; };
+		CDF5920521DDD8900083E58B /* bitboard.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5917121DDD88F0083E58B /* bitboard.cc */; };
+		CDF5920821DDD8900083E58B /* position.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5917421DDD88F0083E58B /* position.cc */; };
+		CDF5920A21DDD8900083E58B /* board.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5917621DDD88F0083E58B /* board.cc */; };
+		CDF5920D21DDD8900083E58B /* uciloop.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5917921DDD88F0083E58B /* uciloop.cc */; };
+		CDF5921221DDD8900083E58B /* string.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5917F21DDD88F0083E58B /* string.cc */; };
+		CDF5921421DDD8900083E58B /* optionsparser.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5918121DDD88F0083E58B /* optionsparser.cc */; };
+		CDF5921621DDD8900083E58B /* weights_adapter.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5918321DDD88F0083E58B /* weights_adapter.cc */; };
+		CDF5921821DDD8900083E58B /* transpose.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5918521DDD88F0083E58B /* transpose.cc */; };
+		CDF5922221DDD8900083E58B /* configfile.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5918F21DDD88F0083E58B /* configfile.cc */; };
+		CDF5922321DDD8900083E58B /* histogram.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5919021DDD88F0083E58B /* histogram.cc */; };
+		CDF5922521DDD8900083E58B /* commandline.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5919221DDD88F0083E58B /* commandline.cc */; };
+		CDF5922621DDD8900083E58B /* random.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5919321DDD88F0083E58B /* random.cc */; };
+		CDF5922B21DDD8900083E58B /* logging.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5919821DDD88F0083E58B /* logging.cc */; };
+		CDF5922E21DDD8900083E58B /* optionsdict.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5919B21DDD88F0083E58B /* optionsdict.cc */; };
+		CDF5923221DDD8900083E58B /* filesystem.posix.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5919F21DDD88F0083E58B /* filesystem.posix.cc */; };
+		CDF5923521DDD8900083E58B /* benchmark.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591A321DDD8900083E58B /* benchmark.cc */; };
+		CDF5923621DDD8900083E58B /* version.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591A421DDD8900083E58B /* version.cc */; };
+		CDF5923721DDD8900083E58B /* tournament.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591A621DDD8900083E58B /* tournament.cc */; };
+		CDF5923821DDD8900083E58B /* loop.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591A721DDD8900083E58B /* loop.cc */; };
+		CDF5923A21DDD8900083E58B /* game.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591A921DDD8900083E58B /* game.cc */; };
+		CDF5923E21DDD8900083E58B /* engine.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591AD21DDD8900083E58B /* engine.cc */; };
+		CDF5924021DDD8900083E58B /* syzygy.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591B021DDD8900083E58B /* syzygy.cc */; };
+		CDF5924221DDD8900083E58B /* network_random.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591B321DDD8900083E58B /* network_random.cc */; };
+		CDF5924321DDD8900083E58B /* network_demux.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591B421DDD8900083E58B /* network_demux.cc */; };
+		CDF5924421DDD8900083E58B /* convolution1.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591B621DDD8900083E58B /* convolution1.cc */; };
+		CDF5924721DDD8900083E58B /* winograd_convolution3.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591B921DDD8900083E58B /* winograd_convolution3.cc */; };
+		CDF5924921DDD8900083E58B /* network_blas.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591BB21DDD8900083E58B /* network_blas.cc */; };
+		CDF5924A21DDD8900083E58B /* se_unit.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591BC21DDD8900083E58B /* se_unit.cc */; };
+		CDF5924F21DDD8900083E58B /* fully_connected_layer.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591C121DDD8900083E58B /* fully_connected_layer.cc */; };
+		CDF5925121DDD8900083E58B /* network_rr.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591C321DDD8900083E58B /* network_rr.cc */; };
+		CDF5925E21DDD8900083E58B /* writer.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591D121DDD8900083E58B /* writer.cc */; };
+		CDF5925F21DDD8900083E58B /* winograd_filter.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591D321DDD8900083E58B /* winograd_filter.cc */; };
+		CDF5926221DDD8900083E58B /* activation.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591D621DDD8900083E58B /* activation.cc */; };
+		CDF5926421DDD8900083E58B /* batchnorm.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591D821DDD8900083E58B /* batchnorm.cc */; };
+		CDF5926521DDD8900083E58B /* loader.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591D921DDD8900083E58B /* loader.cc */; };
+		CDF5926621DDD8900083E58B /* network_st_batch.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591DA21DDD8900083E58B /* network_st_batch.cc */; };
+		CDF5927D21DDD8910083E58B /* network_check.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591F421DDD8900083E58B /* network_check.cc */; };
+		CDF5927F21DDD8910083E58B /* factory.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591F621DDD8900083E58B /* factory.cc */; };
+		CDF5928021DDD8910083E58B /* encoder.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591F721DDD8900083E58B /* encoder.cc */; };
+		CDF5928121DDD8910083E58B /* cache.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591F821DDD8900083E58B /* cache.cc */; };
+		CDF5928221DDD8910083E58B /* network_mux.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591F921DDD8900083E58B /* network_mux.cc */; };
+		CDF5928521DDD8910083E58B /* node.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591FD21DDD8900083E58B /* node.cc */; };
+		CDF5928821DDD8910083E58B /* search.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5920021DDD8900083E58B /* search.cc */; };
+		CDF5928921DDD8910083E58B /* params.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5920121DDD8900083E58B /* params.cc */; };
+		CDF5928F21DDDE980083E58B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF5928E21DDDE980083E58B /* libz.tbd */; };
+		CDF5929921DDF54B0083E58B /* network_legacy.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF591CF21DDD8900083E58B /* network_legacy.cc */; };
+		CDF5929D21DDFCD10083E58B /* net.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = CDF5929B21DDFCD10083E58B /* net.pb.cc */; };
+		CDF5929E21DDFCD10083E58B /* net.pb.h in Headers */ = {isa = PBXBuildFile; fileRef = CDF5929C21DDFCD10083E58B /* net.pb.h */; };
+		CDF592A221DED9540083E58B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDF592A121DED9540083E58B /* Accelerate.framework */; };
+		CDF592A421DEDD9B0083E58B /* LeelaSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF592A321DEDD9B0083E58B /* LeelaSwift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +80,134 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CD82464921E420B5002818C0 /* LeelaConnect.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeelaConnect.cpp; sourceTree = "<group>"; };
+		CD82464A21E420B5002818C0 /* LeelaConnect.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LeelaConnect.hpp; sourceTree = "<group>"; };
+		CD82464B21E420B5002818C0 /* EngineBridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EngineBridge.h; sourceTree = "<group>"; };
+		CD82464C21E420B5002818C0 /* EngineBridge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EngineBridge.mm; sourceTree = "<group>"; };
+		CD82465121E42BEA002818C0 /* BridgingObjects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgingObjects.h; sourceTree = "<group>"; };
+		CD82465221E42BEA002818C0 /* BridgingObjects.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BridgingObjects.mm; sourceTree = "<group>"; };
 		CDAE718A21DD91A000358035 /* LeelaChessZero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LeelaChessZero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDAE718D21DD91A000358035 /* LeelaChessZero.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeelaChessZero.h; sourceTree = "<group>"; };
 		CDAE718E21DD91A000358035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CDAE719321DD91A000358035 /* LeelaChessZeroTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LeelaChessZeroTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDAE719821DD91A000358035 /* LeelaChessZeroTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeelaChessZeroTests.swift; sourceTree = "<group>"; };
 		CDAE719A21DD91A000358035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDB1407C21E15D420090572B /* libprotobuf-lite.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libprotobuf-lite.a"; sourceTree = "<group>"; };
+		CDF5917121DDD88F0083E58B /* bitboard.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bitboard.cc; sourceTree = "<group>"; };
+		CDF5917221DDD88F0083E58B /* callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callbacks.h; sourceTree = "<group>"; };
+		CDF5917321DDD88F0083E58B /* position_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position_test.cc; sourceTree = "<group>"; };
+		CDF5917421DDD88F0083E58B /* position.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = position.cc; sourceTree = "<group>"; };
+		CDF5917521DDD88F0083E58B /* bitboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bitboard.h; sourceTree = "<group>"; };
+		CDF5917621DDD88F0083E58B /* board.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = board.cc; sourceTree = "<group>"; };
+		CDF5917721DDD88F0083E58B /* board_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = board_test.cc; sourceTree = "<group>"; };
+		CDF5917821DDD88F0083E58B /* board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = board.h; sourceTree = "<group>"; };
+		CDF5917921DDD88F0083E58B /* uciloop.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = uciloop.cc; sourceTree = "<group>"; };
+		CDF5917A21DDD88F0083E58B /* position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; };
+		CDF5917B21DDD88F0083E58B /* uciloop.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; path = uciloop.h; sourceTree = "<group>"; };
+		CDF5917C21DDD88F0083E58B /* main.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cc; path = submodules/lc0/src/main.cc; sourceTree = "<group>"; };
+		CDF5917E21DDD88F0083E58B /* filesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = filesystem.h; sourceTree = "<group>"; };
+		CDF5917F21DDD88F0083E58B /* string.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = string.cc; sourceTree = "<group>"; };
+		CDF5918021DDD88F0083E58B /* cppattributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cppattributes.h; sourceTree = "<group>"; };
+		CDF5918121DDD88F0083E58B /* optionsparser.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = optionsparser.cc; sourceTree = "<group>"; };
+		CDF5918221DDD88F0083E58B /* smallarray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = smallarray.h; sourceTree = "<group>"; };
+		CDF5918321DDD88F0083E58B /* weights_adapter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = weights_adapter.cc; sourceTree = "<group>"; };
+		CDF5918421DDD88F0083E58B /* filesystem.win32.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filesystem.win32.cc; sourceTree = "<group>"; };
+		CDF5918521DDD88F0083E58B /* transpose.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = transpose.cc; sourceTree = "<group>"; };
+		CDF5918621DDD88F0083E58B /* weights_adapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = weights_adapter.h; sourceTree = "<group>"; };
+		CDF5918721DDD88F0083E58B /* configfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = configfile.h; sourceTree = "<group>"; };
+		CDF5918821DDD88F0083E58B /* cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cache.h; sourceTree = "<group>"; };
+		CDF5918921DDD88F0083E58B /* optionsparser_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = optionsparser_test.cc; sourceTree = "<group>"; };
+		CDF5918A21DDD88F0083E58B /* logging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logging.h; sourceTree = "<group>"; };
+		CDF5918B21DDD88F0083E58B /* fastmath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fastmath.h; sourceTree = "<group>"; };
+		CDF5918C21DDD88F0083E58B /* optionsparser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optionsparser.h; sourceTree = "<group>"; };
+		CDF5918D21DDD88F0083E58B /* optional.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optional.h; sourceTree = "<group>"; };
+		CDF5918E21DDD88F0083E58B /* bititer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bititer.h; sourceTree = "<group>"; };
+		CDF5918F21DDD88F0083E58B /* configfile.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = configfile.cc; sourceTree = "<group>"; };
+		CDF5919021DDD88F0083E58B /* histogram.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = histogram.cc; sourceTree = "<group>"; };
+		CDF5919121DDD88F0083E58B /* hashcat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hashcat.h; sourceTree = "<group>"; };
+		CDF5919221DDD88F0083E58B /* commandline.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = commandline.cc; sourceTree = "<group>"; };
+		CDF5919321DDD88F0083E58B /* random.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = random.cc; sourceTree = "<group>"; };
+		CDF5919421DDD88F0083E58B /* hashcat_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hashcat_test.cc; sourceTree = "<group>"; };
+		CDF5919521DDD88F0083E58B /* histogram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = histogram.h; sourceTree = "<group>"; };
+		CDF5919621DDD88F0083E58B /* mutex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mutex.h; sourceTree = "<group>"; };
+		CDF5919721DDD88F0083E58B /* commandline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commandline.h; sourceTree = "<group>"; };
+		CDF5919821DDD88F0083E58B /* logging.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = logging.cc; sourceTree = "<group>"; };
+		CDF5919921DDD88F0083E58B /* cache-old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "cache-old.h"; sourceTree = "<group>"; };
+		CDF5919A21DDD88F0083E58B /* exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exception.h; sourceTree = "<group>"; };
+		CDF5919B21DDD88F0083E58B /* optionsdict.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = optionsdict.cc; sourceTree = "<group>"; };
+		CDF5919C21DDD88F0083E58B /* transpose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transpose.h; sourceTree = "<group>"; };
+		CDF5919D21DDD88F0083E58B /* random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = random.h; sourceTree = "<group>"; };
+		CDF5919E21DDD88F0083E58B /* string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = string.h; sourceTree = "<group>"; };
+		CDF5919F21DDD88F0083E58B /* filesystem.posix.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = filesystem.posix.cc; sourceTree = "<group>"; };
+		CDF591A021DDD8900083E58B /* optionsdict.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optionsdict.h; sourceTree = "<group>"; };
+		CDF591A221DDD8900083E58B /* benchmark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = benchmark.h; sourceTree = "<group>"; };
+		CDF591A321DDD8900083E58B /* benchmark.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = benchmark.cc; sourceTree = "<group>"; };
+		CDF591A421DDD8900083E58B /* version.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = version.cc; path = submodules/lc0/src/version.cc; sourceTree = "<group>"; };
+		CDF591A621DDD8900083E58B /* tournament.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tournament.cc; sourceTree = "<group>"; };
+		CDF591A721DDD8900083E58B /* loop.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loop.cc; sourceTree = "<group>"; };
+		CDF591A821DDD8900083E58B /* game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = game.h; sourceTree = "<group>"; };
+		CDF591A921DDD8900083E58B /* game.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cc; sourceTree = "<group>"; };
+		CDF591AA21DDD8900083E58B /* loop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loop.h; sourceTree = "<group>"; };
+		CDF591AB21DDD8900083E58B /* tournament.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tournament.h; sourceTree = "<group>"; };
+		CDF591AC21DDD8900083E58B /* engine.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = engine.h; path = submodules/lc0/src/engine.h; sourceTree = "<group>"; };
+		CDF591AD21DDD8900083E58B /* engine.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = engine.cc; path = submodules/lc0/src/engine.cc; sourceTree = "<group>"; };
+		CDF591AF21DDD8900083E58B /* syzygy_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = syzygy_test.cc; sourceTree = "<group>"; };
+		CDF591B021DDD8900083E58B /* syzygy.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = syzygy.cc; sourceTree = "<group>"; };
+		CDF591B121DDD8900083E58B /* syzygy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = syzygy.h; sourceTree = "<group>"; };
+		CDF591B321DDD8900083E58B /* network_random.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_random.cc; sourceTree = "<group>"; };
+		CDF591B421DDD8900083E58B /* network_demux.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_demux.cc; sourceTree = "<group>"; };
+		CDF591B621DDD8900083E58B /* convolution1.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = convolution1.cc; sourceTree = "<group>"; };
+		CDF591B721DDD8900083E58B /* winograd_transform.ispc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = winograd_transform.ispc; sourceTree = "<group>"; };
+		CDF591B821DDD8900083E58B /* winograd_convolution3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = winograd_convolution3.h; sourceTree = "<group>"; };
+		CDF591B921DDD8900083E58B /* winograd_convolution3.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = winograd_convolution3.cc; sourceTree = "<group>"; };
+		CDF591BA21DDD8900083E58B /* se_unit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = se_unit.h; sourceTree = "<group>"; };
+		CDF591BB21DDD8900083E58B /* network_blas.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_blas.cc; sourceTree = "<group>"; };
+		CDF591BC21DDD8900083E58B /* se_unit.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = se_unit.cc; sourceTree = "<group>"; };
+		CDF591BD21DDD8900083E58B /* convolution1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = convolution1.h; sourceTree = "<group>"; };
+		CDF591BE21DDD8900083E58B /* blas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blas.h; sourceTree = "<group>"; };
+		CDF591BF21DDD8900083E58B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		CDF591C021DDD8900083E58B /* fully_connected_layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fully_connected_layer.h; sourceTree = "<group>"; };
+		CDF591C121DDD8900083E58B /* fully_connected_layer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fully_connected_layer.cc; sourceTree = "<group>"; };
+		CDF591C221DDD8900083E58B /* network_st_batch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = network_st_batch.h; sourceTree = "<group>"; };
+		CDF591C321DDD8900083E58B /* network_rr.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_rr.cc; sourceTree = "<group>"; };
+		CDF591C421DDD8900083E58B /* network_legacy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = network_legacy.h; sourceTree = "<group>"; };
+		CDF591CE21DDD8900083E58B /* encoder_test.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = encoder_test.cc; sourceTree = "<group>"; };
+		CDF591CF21DDD8900083E58B /* network_legacy.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_legacy.cc; sourceTree = "<group>"; };
+		CDF591D021DDD8900083E58B /* cache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cache.h; sourceTree = "<group>"; };
+		CDF591D121DDD8900083E58B /* writer.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = writer.cc; sourceTree = "<group>"; };
+		CDF591D321DDD8900083E58B /* winograd_filter.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = winograd_filter.cc; sourceTree = "<group>"; };
+		CDF591D421DDD8900083E58B /* winograd_filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = winograd_filter.h; sourceTree = "<group>"; };
+		CDF591D521DDD8900083E58B /* batchnorm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = batchnorm.h; sourceTree = "<group>"; };
+		CDF591D621DDD8900083E58B /* activation.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = activation.cc; sourceTree = "<group>"; };
+		CDF591D721DDD8900083E58B /* activation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = activation.h; sourceTree = "<group>"; };
+		CDF591D821DDD8900083E58B /* batchnorm.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = batchnorm.cc; sourceTree = "<group>"; };
+		CDF591D921DDD8900083E58B /* loader.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = loader.cc; sourceTree = "<group>"; };
+		CDF591DA21DDD8900083E58B /* network_st_batch.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_st_batch.cc; sourceTree = "<group>"; };
+		CDF591F121DDD8900083E58B /* network_tf.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_tf.cc; sourceTree = "<group>"; };
+		CDF591F221DDD8900083E58B /* network.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = network.h; sourceTree = "<group>"; };
+		CDF591F321DDD8900083E58B /* loader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loader.h; sourceTree = "<group>"; };
+		CDF591F421DDD8900083E58B /* network_check.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_check.cc; sourceTree = "<group>"; };
+		CDF591F521DDD8900083E58B /* encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encoder.h; sourceTree = "<group>"; };
+		CDF591F621DDD8900083E58B /* factory.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = factory.cc; sourceTree = "<group>"; };
+		CDF591F721DDD8900083E58B /* encoder.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = encoder.cc; sourceTree = "<group>"; };
+		CDF591F821DDD8900083E58B /* cache.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cache.cc; sourceTree = "<group>"; };
+		CDF591F921DDD8900083E58B /* network_mux.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = network_mux.cc; sourceTree = "<group>"; };
+		CDF591FA21DDD8900083E58B /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		CDF591FB21DDD8900083E58B /* factory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = factory.h; sourceTree = "<group>"; };
+		CDF591FD21DDD8900083E58B /* node.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = node.cc; sourceTree = "<group>"; };
+		CDF591FE21DDD8900083E58B /* params.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = params.h; sourceTree = "<group>"; };
+		CDF591FF21DDD8900083E58B /* node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = node.h; sourceTree = "<group>"; };
+		CDF5920021DDD8900083E58B /* search.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = search.cc; sourceTree = "<group>"; };
+		CDF5920121DDD8900083E58B /* params.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = params.cc; sourceTree = "<group>"; };
+		CDF5920221DDD8900083E58B /* search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = search.h; sourceTree = "<group>"; };
+		CDF5920321DDD8900083E58B /* version.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; name = version.inc; path = submodules/lc0/src/version.inc; sourceTree = "<group>"; };
+		CDF5920421DDD8900083E58B /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = submodules/lc0/src/version.h; sourceTree = "<group>"; };
+		CDF5928E21DDDE980083E58B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		CDF5929421DDF3920083E58B /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
+		CDF5929B21DDFCD10083E58B /* net.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = net.pb.cc; sourceTree = "<group>"; };
+		CDF5929C21DDFCD10083E58B /* net.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.pb.h; sourceTree = "<group>"; };
+		CDF592A121DED9540083E58B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		CDF592A321DEDD9B0083E58B /* LeelaSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeelaSwift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +215,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDB1407D21E15D420090572B /* libprotobuf-lite.a in Frameworks */,
+				CDF592A221DED9540083E58B /* Accelerate.framework in Frameworks */,
+				CDF5928F21DDDE980083E58B /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,9 +235,12 @@
 		CDAE718021DD91A000358035 = {
 			isa = PBXGroup;
 			children = (
+				CDF5929A21DDFCD10083E58B /* proto */,
+				CDF5916F21DDD8700083E58B /* lc0 */,
 				CDAE718C21DD91A000358035 /* LeelaChessZero */,
 				CDAE719721DD91A000358035 /* LeelaChessZeroTests */,
 				CDAE718B21DD91A000358035 /* Products */,
+				CDF5928D21DDDE980083E58B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -71,8 +256,15 @@
 		CDAE718C21DD91A000358035 /* LeelaChessZero */ = {
 			isa = PBXGroup;
 			children = (
-				CDAE718D21DD91A000358035 /* LeelaChessZero.h */,
 				CDAE718E21DD91A000358035 /* Info.plist */,
+				CD82465121E42BEA002818C0 /* BridgingObjects.h */,
+				CD82465221E42BEA002818C0 /* BridgingObjects.mm */,
+				CD82464B21E420B5002818C0 /* EngineBridge.h */,
+				CD82464C21E420B5002818C0 /* EngineBridge.mm */,
+				CDAE718D21DD91A000358035 /* LeelaChessZero.h */,
+				CD82464921E420B5002818C0 /* LeelaConnect.cpp */,
+				CD82464A21E420B5002818C0 /* LeelaConnect.hpp */,
+				CDF592A321DEDD9B0083E58B /* LeelaSwift.swift */,
 			);
 			path = LeelaChessZero;
 			sourceTree = "<group>";
@@ -86,6 +278,222 @@
 			path = LeelaChessZeroTests;
 			sourceTree = "<group>";
 		};
+		CDF5916F21DDD8700083E58B /* lc0 */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591A121DDD8900083E58B /* benchmark */,
+				CDF5917021DDD88F0083E58B /* chess */,
+				CDF591AD21DDD8900083E58B /* engine.cc */,
+				CDF591AC21DDD8900083E58B /* engine.h */,
+				CDF5917C21DDD88F0083E58B /* main.cc */,
+				CDF591FC21DDD8900083E58B /* mcts */,
+				CDF591B221DDD8900083E58B /* neural */,
+				CDF591A521DDD8900083E58B /* selfplay */,
+				CDF591AE21DDD8900083E58B /* syzygy */,
+				CDF5917D21DDD88F0083E58B /* utils */,
+				CDF591A421DDD8900083E58B /* version.cc */,
+				CDF5920421DDD8900083E58B /* version.h */,
+				CDF5920321DDD8900083E58B /* version.inc */,
+			);
+			name = lc0;
+			sourceTree = "<group>";
+		};
+		CDF5917021DDD88F0083E58B /* chess */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5917121DDD88F0083E58B /* bitboard.cc */,
+				CDF5917721DDD88F0083E58B /* board_test.cc */,
+				CDF5917621DDD88F0083E58B /* board.cc */,
+				CDF5917321DDD88F0083E58B /* position_test.cc */,
+				CDF5917421DDD88F0083E58B /* position.cc */,
+				CDF5917921DDD88F0083E58B /* uciloop.cc */,
+				CDF5917521DDD88F0083E58B /* bitboard.h */,
+				CDF5917821DDD88F0083E58B /* board.h */,
+				CDF5917221DDD88F0083E58B /* callbacks.h */,
+				CDF5917A21DDD88F0083E58B /* position.h */,
+				CDF5917B21DDD88F0083E58B /* uciloop.h */,
+			);
+			name = chess;
+			path = submodules/lc0/src/chess;
+			sourceTree = "<group>";
+		};
+		CDF5917D21DDD88F0083E58B /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5919221DDD88F0083E58B /* commandline.cc */,
+				CDF5918F21DDD88F0083E58B /* configfile.cc */,
+				CDF5919F21DDD88F0083E58B /* filesystem.posix.cc */,
+				CDF5918421DDD88F0083E58B /* filesystem.win32.cc */,
+				CDF5919421DDD88F0083E58B /* hashcat_test.cc */,
+				CDF5919021DDD88F0083E58B /* histogram.cc */,
+				CDF5919821DDD88F0083E58B /* logging.cc */,
+				CDF5919B21DDD88F0083E58B /* optionsdict.cc */,
+				CDF5918921DDD88F0083E58B /* optionsparser_test.cc */,
+				CDF5918121DDD88F0083E58B /* optionsparser.cc */,
+				CDF5919321DDD88F0083E58B /* random.cc */,
+				CDF5917F21DDD88F0083E58B /* string.cc */,
+				CDF5918521DDD88F0083E58B /* transpose.cc */,
+				CDF5918321DDD88F0083E58B /* weights_adapter.cc */,
+				CDF5918E21DDD88F0083E58B /* bititer.h */,
+				CDF5919921DDD88F0083E58B /* cache-old.h */,
+				CDF5918821DDD88F0083E58B /* cache.h */,
+				CDF5919721DDD88F0083E58B /* commandline.h */,
+				CDF5918721DDD88F0083E58B /* configfile.h */,
+				CDF5918021DDD88F0083E58B /* cppattributes.h */,
+				CDF5919A21DDD88F0083E58B /* exception.h */,
+				CDF5918B21DDD88F0083E58B /* fastmath.h */,
+				CDF5917E21DDD88F0083E58B /* filesystem.h */,
+				CDF5919121DDD88F0083E58B /* hashcat.h */,
+				CDF5919521DDD88F0083E58B /* histogram.h */,
+				CDF5918A21DDD88F0083E58B /* logging.h */,
+				CDF5919621DDD88F0083E58B /* mutex.h */,
+				CDF5918D21DDD88F0083E58B /* optional.h */,
+				CDF591A021DDD8900083E58B /* optionsdict.h */,
+				CDF5918C21DDD88F0083E58B /* optionsparser.h */,
+				CDF5919D21DDD88F0083E58B /* random.h */,
+				CDF5918221DDD88F0083E58B /* smallarray.h */,
+				CDF5919E21DDD88F0083E58B /* string.h */,
+				CDF5919C21DDD88F0083E58B /* transpose.h */,
+				CDF5918621DDD88F0083E58B /* weights_adapter.h */,
+			);
+			name = utils;
+			path = submodules/lc0/src/utils;
+			sourceTree = "<group>";
+		};
+		CDF591A121DDD8900083E58B /* benchmark */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591A221DDD8900083E58B /* benchmark.h */,
+				CDF591A321DDD8900083E58B /* benchmark.cc */,
+			);
+			name = benchmark;
+			path = submodules/lc0/src/benchmark;
+			sourceTree = "<group>";
+		};
+		CDF591A521DDD8900083E58B /* selfplay */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591A621DDD8900083E58B /* tournament.cc */,
+				CDF591A721DDD8900083E58B /* loop.cc */,
+				CDF591A821DDD8900083E58B /* game.h */,
+				CDF591A921DDD8900083E58B /* game.cc */,
+				CDF591AA21DDD8900083E58B /* loop.h */,
+				CDF591AB21DDD8900083E58B /* tournament.h */,
+			);
+			name = selfplay;
+			path = submodules/lc0/src/selfplay;
+			sourceTree = "<group>";
+		};
+		CDF591AE21DDD8900083E58B /* syzygy */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591AF21DDD8900083E58B /* syzygy_test.cc */,
+				CDF591B021DDD8900083E58B /* syzygy.cc */,
+				CDF591B121DDD8900083E58B /* syzygy.h */,
+			);
+			name = syzygy;
+			path = submodules/lc0/src/syzygy;
+			sourceTree = "<group>";
+		};
+		CDF591B221DDD8900083E58B /* neural */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591B521DDD8900083E58B /* blas */,
+				CDF591D221DDD8900083E58B /* shared */,
+				CDF591F821DDD8900083E58B /* cache.cc */,
+				CDF591CE21DDD8900083E58B /* encoder_test.cc */,
+				CDF591F721DDD8900083E58B /* encoder.cc */,
+				CDF591F621DDD8900083E58B /* factory.cc */,
+				CDF591D921DDD8900083E58B /* loader.cc */,
+				CDF591F421DDD8900083E58B /* network_check.cc */,
+				CDF591B421DDD8900083E58B /* network_demux.cc */,
+				CDF591CF21DDD8900083E58B /* network_legacy.cc */,
+				CDF591F921DDD8900083E58B /* network_mux.cc */,
+				CDF591B321DDD8900083E58B /* network_random.cc */,
+				CDF591C321DDD8900083E58B /* network_rr.cc */,
+				CDF591DA21DDD8900083E58B /* network_st_batch.cc */,
+				CDF591F121DDD8900083E58B /* network_tf.cc */,
+				CDF591D121DDD8900083E58B /* writer.cc */,
+				CDF591D021DDD8900083E58B /* cache.h */,
+				CDF591F521DDD8900083E58B /* encoder.h */,
+				CDF591FB21DDD8900083E58B /* factory.h */,
+				CDF591F321DDD8900083E58B /* loader.h */,
+				CDF591C421DDD8900083E58B /* network_legacy.h */,
+				CDF591C221DDD8900083E58B /* network_st_batch.h */,
+				CDF591F221DDD8900083E58B /* network.h */,
+				CDF591FA21DDD8900083E58B /* writer.h */,
+			);
+			name = neural;
+			path = submodules/lc0/src/neural;
+			sourceTree = "<group>";
+		};
+		CDF591B521DDD8900083E58B /* blas */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591B621DDD8900083E58B /* convolution1.cc */,
+				CDF591C121DDD8900083E58B /* fully_connected_layer.cc */,
+				CDF591BB21DDD8900083E58B /* network_blas.cc */,
+				CDF591BC21DDD8900083E58B /* se_unit.cc */,
+				CDF591B921DDD8900083E58B /* winograd_convolution3.cc */,
+				CDF591BE21DDD8900083E58B /* blas.h */,
+				CDF591BD21DDD8900083E58B /* convolution1.h */,
+				CDF591C021DDD8900083E58B /* fully_connected_layer.h */,
+				CDF591BA21DDD8900083E58B /* se_unit.h */,
+				CDF591B821DDD8900083E58B /* winograd_convolution3.h */,
+				CDF591B721DDD8900083E58B /* winograd_transform.ispc */,
+				CDF591BF21DDD8900083E58B /* README.md */,
+			);
+			path = blas;
+			sourceTree = "<group>";
+		};
+		CDF591D221DDD8900083E58B /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591D621DDD8900083E58B /* activation.cc */,
+				CDF591D821DDD8900083E58B /* batchnorm.cc */,
+				CDF591D321DDD8900083E58B /* winograd_filter.cc */,
+				CDF591D721DDD8900083E58B /* activation.h */,
+				CDF591D521DDD8900083E58B /* batchnorm.h */,
+				CDF591D421DDD8900083E58B /* winograd_filter.h */,
+			);
+			path = shared;
+			sourceTree = "<group>";
+		};
+		CDF591FC21DDD8900083E58B /* mcts */ = {
+			isa = PBXGroup;
+			children = (
+				CDF591FD21DDD8900083E58B /* node.cc */,
+				CDF5920121DDD8900083E58B /* params.cc */,
+				CDF5920021DDD8900083E58B /* search.cc */,
+				CDF591FF21DDD8900083E58B /* node.h */,
+				CDF591FE21DDD8900083E58B /* params.h */,
+				CDF5920221DDD8900083E58B /* search.h */,
+			);
+			name = mcts;
+			path = submodules/lc0/src/mcts;
+			sourceTree = "<group>";
+		};
+		CDF5928D21DDDE980083E58B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDB1407C21E15D420090572B /* libprotobuf-lite.a */,
+				CDF592A121DED9540083E58B /* Accelerate.framework */,
+				CDF5929421DDF3920083E58B /* libprotobuf.a */,
+				CDF5928E21DDDE980083E58B /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDF5929A21DDFCD10083E58B /* proto */ = {
+			isa = PBXGroup;
+			children = (
+				CDF5929B21DDFCD10083E58B /* net.pb.cc */,
+				CDF5929C21DDFCD10083E58B /* net.pb.h */,
+			);
+			name = proto;
+			path = generated/proto;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -93,7 +501,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD82464F21E420B5002818C0 /* EngineBridge.h in Headers */,
+				CD82465321E42BEA002818C0 /* BridgingObjects.h in Headers */,
 				CDAE719B21DD91A000358035 /* LeelaChessZero.h in Headers */,
+				CDF5929E21DDFCD10083E58B /* net.pb.h in Headers */,
+				CD82464E21E420B5002818C0 /* LeelaConnect.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +560,7 @@
 				TargetAttributes = {
 					CDAE718921DD91A000358035 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					CDAE719221DD91A000358035 = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +607,56 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDF5924F21DDD8900083E58B /* fully_connected_layer.cc in Sources */,
+				CDF5925121DDD8900083E58B /* network_rr.cc in Sources */,
+				CDF5923221DDD8900083E58B /* filesystem.posix.cc in Sources */,
+				CDF5926521DDD8900083E58B /* loader.cc in Sources */,
+				CDF5924921DDD8900083E58B /* network_blas.cc in Sources */,
+				CDF5928521DDD8910083E58B /* node.cc in Sources */,
+				CDF5921821DDD8900083E58B /* transpose.cc in Sources */,
+				CDF5924021DDD8900083E58B /* syzygy.cc in Sources */,
+				CD82465021E420B5002818C0 /* EngineBridge.mm in Sources */,
+				CDF5923521DDD8900083E58B /* benchmark.cc in Sources */,
+				CDF5927F21DDD8910083E58B /* factory.cc in Sources */,
+				CDF5924421DDD8900083E58B /* convolution1.cc in Sources */,
+				CDF5922B21DDD8900083E58B /* logging.cc in Sources */,
+				CDF5921621DDD8900083E58B /* weights_adapter.cc in Sources */,
+				CDF5924A21DDD8900083E58B /* se_unit.cc in Sources */,
+				CDF5925F21DDD8900083E58B /* winograd_filter.cc in Sources */,
+				CDF5923621DDD8900083E58B /* version.cc in Sources */,
+				CDF5923821DDD8900083E58B /* loop.cc in Sources */,
+				CDF5928221DDD8910083E58B /* network_mux.cc in Sources */,
+				CDF5920D21DDD8900083E58B /* uciloop.cc in Sources */,
+				CDF5926621DDD8900083E58B /* network_st_batch.cc in Sources */,
+				CDF5921421DDD8900083E58B /* optionsparser.cc in Sources */,
+				CDF5922621DDD8900083E58B /* random.cc in Sources */,
+				CDF5924221DDD8900083E58B /* network_random.cc in Sources */,
+				CDF5923721DDD8900083E58B /* tournament.cc in Sources */,
+				CDF5922221DDD8900083E58B /* configfile.cc in Sources */,
+				CDF5921221DDD8900083E58B /* string.cc in Sources */,
+				CDF5923A21DDD8900083E58B /* game.cc in Sources */,
+				CDF5922E21DDD8900083E58B /* optionsdict.cc in Sources */,
+				CDF5926421DDD8900083E58B /* batchnorm.cc in Sources */,
+				CDF5920821DDD8900083E58B /* position.cc in Sources */,
+				CDF5920521DDD8900083E58B /* bitboard.cc in Sources */,
+				CDF5922521DDD8900083E58B /* commandline.cc in Sources */,
+				CDF5923E21DDD8900083E58B /* engine.cc in Sources */,
+				CDF5924321DDD8900083E58B /* network_demux.cc in Sources */,
+				CDF5928921DDD8910083E58B /* params.cc in Sources */,
+				CD82465421E42BEA002818C0 /* BridgingObjects.mm in Sources */,
+				CDF5929D21DDFCD10083E58B /* net.pb.cc in Sources */,
+				CDF5920A21DDD8900083E58B /* board.cc in Sources */,
+				CDF5924721DDD8900083E58B /* winograd_convolution3.cc in Sources */,
+				CDF5928821DDD8910083E58B /* search.cc in Sources */,
+				CDF5925E21DDD8900083E58B /* writer.cc in Sources */,
+				CDF5922321DDD8900083E58B /* histogram.cc in Sources */,
+				CDF5928121DDD8910083E58B /* cache.cc in Sources */,
+				CDF5927D21DDD8910083E58B /* network_check.cc in Sources */,
+				CDF5929921DDF54B0083E58B /* network_legacy.cc in Sources */,
+				CDF5928021DDD8910083E58B /* encoder.cc in Sources */,
+				CDF592A421DEDD9B0083E58B /* LeelaSwift.swift in Sources */,
+				CD82464D21E420B5002818C0 /* LeelaConnect.cpp in Sources */,
+				CDF5926221DDD8900083E58B /* activation.cc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +804,8 @@
 		CDAE719F21DD91A000358035 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -348,6 +813,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/submodules/lc0/src",
+					"$(SRCROOT)/submodules/lc0/third_party",
+					"$(SRCROOT)/submodules/protobuf/src",
+					"$(SRCROOT)/generated",
+				);
 				INFOPLIST_FILE = LeelaChessZero/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -355,10 +826,17 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dpedley.LeelaChessZero;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -366,6 +844,8 @@
 		CDAE71A021DD91A000358035 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -373,6 +853,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/submodules/lc0/src",
+					"$(SRCROOT)/submodules/lc0/third_party",
+					"$(SRCROOT)/submodules/protobuf/src",
+					"$(SRCROOT)/generated",
+				);
 				INFOPLIST_FILE = LeelaChessZero/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -380,10 +866,16 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dpedley.LeelaChessZero;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 4.2;
+				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -391,6 +883,7 @@
 		CDAE71A221DD91A000358035 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GNE4VFAE6G;
 				INFOPLIST_FILE = LeelaChessZeroTests/Info.plist;
@@ -409,6 +902,7 @@
 		CDAE71A321DD91A000358035 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = GNE4VFAE6G;
 				INFOPLIST_FILE = LeelaChessZeroTests/Info.plist;

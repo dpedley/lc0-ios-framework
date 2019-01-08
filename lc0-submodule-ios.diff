@@ -1,0 +1,59 @@
+diff --git a/src/mcts/params.cc b/src/mcts/params.cc
+index 85dcb5f..2a2dea0 100644
+--- a/src/mcts/params.cc
++++ b/src/mcts/params.cc
+@@ -34,7 +34,7 @@ FillEmptyHistory EncodeHistoryFill(std::string history_fill) {
+   if (history_fill == "fen_only") return FillEmptyHistory::FEN_ONLY;
+   if (history_fill == "always") return FillEmptyHistory::ALWAYS;
+   assert(history_fill == "no");
+-  return FillEmptyHistory::NO;
++  return FillEmptyHistory::NEVER;
+ }
+ 
+ }  // namespace
+diff --git a/src/neural/encoder.cc b/src/neural/encoder.cc
+index 77e9a51..7a5f52c 100644
+--- a/src/neural/encoder.cc
++++ b/src/neural/encoder.cc
+@@ -64,7 +64,7 @@ InputPlanes EncodePositionForNN(const PositionHistory& history,
+         history.GetPositionAt(history_idx < 0 ? 0 : history_idx);
+     const ChessBoard& board =
+         flip ? position.GetThemBoard() : position.GetBoard();
+-    if (history_idx < 0 && fill_empty_history == FillEmptyHistory::NO) break;
++    if (history_idx < 0 && fill_empty_history == FillEmptyHistory::NEVER) break;
+     // Board may be flipped so compare with position.GetBoard().
+     if (history_idx < 0 && fill_empty_history == FillEmptyHistory::FEN_ONLY &&
+         position.GetBoard() == ChessBoard::kStartposBoard) {
+diff --git a/src/neural/encoder.h b/src/neural/encoder.h
+index 19669a2..971af2e 100644
+--- a/src/neural/encoder.h
++++ b/src/neural/encoder.h
+@@ -32,7 +32,7 @@
+ 
+ namespace lczero {
+ 
+-enum class FillEmptyHistory {NO, FEN_ONLY, ALWAYS};
++enum class FillEmptyHistory {NEVER, FEN_ONLY, ALWAYS};
+ 
+ // Encodes the last position in history for the neural network request.
+ InputPlanes EncodePositionForNN(const PositionHistory& history,
+diff --git a/src/utils/weights_adapter.cc b/src/utils/weights_adapter.cc
+index ea54fa3..9e50e26 100644
+--- a/src/utils/weights_adapter.cc
++++ b/src/utils/weights_adapter.cc
+@@ -25,7 +25,7 @@
+   Program grant you additional permission to convey the resulting work.
+ */
+ 
+-#include "src/utils/weights_adapter.h"
++#include "utils/weights_adapter.h"
+ 
+ namespace lczero {
+ float LayerAdapter::Iterator::ExtractValue(const uint16_t* ptr,
+@@ -49,4 +49,4 @@ float LayerAdapter::Iterator::operator[](size_t idx) const {
+   return ExtractValue(data_ + idx, adapter_);
+ }
+ 
+-}  // namespace lczero
+\ No newline at end of file
++}  // namespace lczero

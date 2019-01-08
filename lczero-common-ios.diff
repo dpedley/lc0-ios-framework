@@ -1,0 +1,13 @@
+diff --git a/proto/net.proto b/proto/net.proto
+index 6f0e9e9..bbd0189 100644
+--- a/proto/net.proto
++++ b/proto/net.proto
+@@ -28,6 +28,8 @@ syntax = "proto2";
+ 
+ package pblczero;
+ 
++option optimize_for = LITE_RUNTIME;
++
+ message EngineVersion {
+   optional uint32 major = 1;
+   optional uint32 minor = 2;
