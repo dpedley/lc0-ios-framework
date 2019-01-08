@@ -8,7 +8,7 @@ The majority of the work needed here was crossing the languange boundaries.
 
  * Leela is in C++, so I used `uciloop.cc` as a template for binding to lc0 callbacks called `LeelaConnect`.
  * C++ doesn't play nice with Objective-C, so I used Objective-C++ as the pass through language. `EngineBridge.mm`
- * `LeelaSwift.swift` uses the EngineBridge and presents blocks to facilitate callbacks.
+ * `LeelaSwift.swift` uses the EngineBridge gives a delegate interface for communication.
  
 How it works.
 
