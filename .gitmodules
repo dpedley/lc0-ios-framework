@@ -1,3 +1,6 @@
 [submodule "submodules/protobuf"]
 	path = submodules/protobuf
 	url = https://github.com/protocolbuffers/protobuf.git
+[submodule "submodules/lc0"]
+	path = submodules/lc0
+	url = git@github.com:dpedley/lc0.git
