@@ -492,7 +492,7 @@
 			);
 			name = proto;
 			path = generated/proto;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 

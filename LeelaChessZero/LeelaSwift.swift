@@ -34,17 +34,17 @@ public protocol LeelaChessZeroDelegate: class {
 
 public enum lczero {
     public struct UCIGoParams {
-        var wtime: TimeInterval?
-        var btime: TimeInterval?
-        var winc: TimeInterval?
-        var binc: TimeInterval?
-        var movestogo: Int?
-        var depth: Int?
-        var nodes: Int?
-        var movetime: TimeInterval?
-        var infinite = false
-        var searchmoves: [String] = []
-        var ponder = false
+        public var wtime: TimeInterval?
+        public var btime: TimeInterval?
+        public var winc: TimeInterval?
+        public var binc: TimeInterval?
+        public var movestogo: Int?
+        public var depth: Int?
+        public var nodes: Int?
+        public var movetime: TimeInterval?
+        public var infinite = false
+        public var searchmoves: [String] = []
+        public var ponder = false
         public init() {}
     }
 
