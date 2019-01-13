@@ -1,3 +1,16 @@
+diff --git a/src/engine.h b/src/engine.h
+index 89ad6d8..43ec05c 100644
+--- a/src/engine.h
++++ b/src/engine.h
+@@ -97,7 +97,7 @@ class EngineController {
+   RpSharedMutex busy_mutex_;
+   using SharedLock = std::shared_lock<RpSharedMutex>;
+ 
+-  std::unique_ptr<Search> search_;
++  std::shared_ptr<Search> search_;
+   std::unique_ptr<NodeTree> tree_;
+   std::unique_ptr<SyzygyTablebase> syzygy_tb_;
+   std::unique_ptr<Network> network_;
 diff --git a/src/mcts/params.cc b/src/mcts/params.cc
 index 85dcb5f..2a2dea0 100644
 --- a/src/mcts/params.cc
@@ -11,6 +24,478 @@ index 85dcb5f..2a2dea0 100644
  }
  
  }  // namespace
+diff --git a/src/mcts/search.cc b/src/mcts/search.cc
+index af214da..894cd07 100644
+--- a/src/mcts/search.cc
++++ b/src/mcts/search.cc
+@@ -35,6 +35,9 @@
+ #include <iterator>
+ #include <sstream>
+ #include <thread>
++#define _LIBCPP_NO_EXCEPTIONS 1
++#include <memory>
++#undef _LIBCPP_NO_EXCEPTIONS
+ 
+ #include "mcts/node.h"
+ #include "neural/cache.h"
+@@ -357,6 +360,8 @@ void Search::MaybeTriggerStop() {
+     SendUciInfo();
+     EnsureBestMoveKnown();
+     SendMovesStats();
++      
++    // suspect, Lock above and thread here
+     best_move_callback_(
+         {final_bestmove_.GetMove(played_history_.IsBlackToMove()),
+          final_pondermove_.GetMove(!played_history_.IsBlackToMove())});
+@@ -589,18 +594,39 @@ EdgeAndNode Search::GetBestChildWithTemperature(Node* parent,
+   return {};
+ }
+ 
++std::thread Search::CreateWorkerThread() {
++    std::thread threadObj([this]{
++        auto workerHistory = this->played_history_;
++        std::weak_ptr<Search> weak = shared_from_this();
++        SearchWorker worker(weak, workerHistory, params_);
++        worker.RunBlocking();
++    });
++    return threadObj;
++}
++      
++std::thread Search::CreateWatchdogThread() {
++  std::thread threadObj([this]{
++      WatchdogThread();
++  });
++  return threadObj;
++}
++
++std::function<int ()> Search::CreateTimeoutFunction() {
++  auto timeoutFunction = [this]() {
++    return stop_.load(std::memory_order_acquire);
++  };
++  return timeoutFunction;
++}
++
+ void Search::StartThreads(size_t how_many) {
+   Mutex::Lock lock(threads_mutex_);
+   // First thread is a watchdog thread.
+   if (threads_.size() == 0) {
+-    threads_.emplace_back([this]() { WatchdogThread(); });
++    threads_.emplace_back(CreateWatchdogThread());
+   }
+   // Start working threads.
+   while (threads_.size() <= how_many) {
+-    threads_.emplace_back([this]() {
+-      SearchWorker worker(this, params_);
+-      worker.RunBlocking();
+-    });
++    threads_.emplace_back(CreateWorkerThread());
+   }
+ }
+ 
+@@ -639,9 +665,7 @@ void Search::WatchdogThread() {
+     // mode during thinking.
+     // Minimum wait time is there to prevent busy wait and other threads
+     // starvation.
+-    watchdog_cv_.wait_for(lock.get_raw(), remaining_time, [this]() {
+-      return stop_.load(std::memory_order_acquire);
+-    });
++    watchdog_cv_.wait_for(lock.get_raw(), remaining_time, CreateTimeoutFunction());
+   }
+   LOGFILE << "End a watchdog thread.";
+ }
+@@ -652,14 +676,12 @@ void Search::FireStopInternal() {
+ }
+ 
+ void Search::Stop() {
+-  Mutex::Lock lock(counters_mutex_);
+   ok_to_respond_bestmove_ = true;
+   FireStopInternal();
+   LOGFILE << "Stopping search due to `stop` uci command.";
+ }
+ 
+ void Search::Abort() {
+-  Mutex::Lock lock(counters_mutex_);
+   if (!stop_.load(std::memory_order_acquire)) {
+     bestmove_is_sent_ = true;
+     FireStopInternal();
+@@ -687,7 +709,8 @@ Search::~Search() {
+ 
+ void SearchWorker::ExecuteOneIteration() {
+   // 1. Initialize internal structures.
+-  InitializeIteration(search_->network_->NewComputation());
++  auto strong = search_.lock();
++  InitializeIteration(strong->network_->NewComputation());
+ 
+   // 2. Gather minibatch.
+   GatherMinibatch();
+@@ -712,14 +735,15 @@ void SearchWorker::ExecuteOneIteration() {
+ // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ void SearchWorker::InitializeIteration(
+     std::unique_ptr<NetworkComputation> computation) {
++    auto strong = search_.lock();
+   computation_ = std::make_unique<CachingComputation>(std::move(computation),
+-                                                      search_->cache_);
++                                                      strong->cache_);
+   minibatch_.clear();
+ 
+   if (!root_move_filter_populated_) {
+     root_move_filter_populated_ = true;
+-    if (search_->PopulateRootMoveLimit(&root_move_filter_)) {
+-      search_->tb_hits_.fetch_add(1, std::memory_order_acq_rel);
++    if (strong->PopulateRootMoveLimit(&root_move_filter_)) {
++      strong->tb_hits_.fetch_add(1, std::memory_order_acq_rel);
+     }
+   }
+ }
+@@ -734,6 +758,7 @@ void SearchWorker::GatherMinibatch() {
+ 
+   // Number of nodes processed out of order.
+   number_out_of_order_ = 0;
++    auto strong = search_.lock();
+ 
+   // Gather nodes to process in the current batch.
+   // If we had too many (kMiniBatchSize) nodes out of order, also interrupt the
+@@ -752,7 +777,7 @@ void SearchWorker::GatherMinibatch() {
+     if (picked_node.IsCollision()) {
+       if (--collision_events_left <= 0) return;
+       if ((collisions_left -= picked_node.multivisit) <= 0) return;
+-      if (search_->stop_.load(std::memory_order_acquire)) return;
++      if (strong->stop_.load(std::memory_order_acquire)) return;
+       continue;
+     }
+     ++minibatch_size;
+@@ -778,7 +803,7 @@ void SearchWorker::GatherMinibatch() {
+       FetchSingleNodeResult(&picked_node, computation_->GetBatchSize() - 1);
+       {
+         // Nodes mutex for doing node updates.
+-        SharedMutex::Lock lock(search_->nodes_mutex_);
++        SharedMutex::Lock lock(strong->nodes_mutex_);
+         DoBackupUpdateSingleNode(picked_node);
+       }
+ 
+@@ -791,7 +816,7 @@ void SearchWorker::GatherMinibatch() {
+       ++number_out_of_order_;
+     }
+     // Check for stop at the end so we have at least one node.
+-    if (search_->stop_.load(std::memory_order_acquire)) return;
++    if (strong->stop_.load(std::memory_order_acquire)) return;
+   }
+ }
+ 
+@@ -813,7 +838,9 @@ SearchWorker::NodeToProcess SearchWorker::PickNodeToExtend(
+   // node at each level according to the MCTS formula. n_in_flight_ is
+   // incremented for each node in the playout (via TryStartScoreUpdate()).
+ 
+-  Node* node = search_->root_node_;
++  auto strong = search_.lock();
++
++  Node* node = strong->root_node_;
+   Node::Iterator best_edge;
+   Node::Iterator second_best_edge;
+ 
+@@ -823,10 +850,10 @@ SearchWorker::NodeToProcess SearchWorker::PickNodeToExtend(
+     precached_node_ = std::make_unique<Node>(nullptr, 0);
+   }
+ 
+-  SharedMutex::Lock lock(search_->nodes_mutex_);
++  SharedMutex::Lock lock(strong->nodes_mutex_);
+ 
+   // Fetch the current best root node visits for possible smart pruning.
+-  int64_t best_node_n = search_->current_best_edge_.GetN();
++  int64_t best_node_n = strong->current_best_edge_.GetN();
+ 
+   // True on first iteration, false as we dive deeper.
+   bool is_root_node = true;
+@@ -850,14 +877,14 @@ SearchWorker::NodeToProcess SearchWorker::PickNodeToExtend(
+     // a search collision, and this node is already being expanded.
+     if (!node->TryStartScoreUpdate()) {
+       if (!is_root_node) {
+-        IncrementNInFlight(node->GetParent(), search_->root_node_, collision_limit - 1);
++        IncrementNInFlight(node->GetParent(), strong->root_node_, collision_limit - 1);
+       }
+       return NodeToProcess::Collision(node, depth, collision_limit);
+     }
+     // Either terminal or unexamined leaf node -- the end of this playout.
+     if (!node->HasChildren()) {
+       if (node->IsTerminal()) {
+-        IncrementNInFlight(node, search_->root_node_, collision_limit - 1);
++        IncrementNInFlight(node, strong->root_node_, collision_limit - 1);
+         return NodeToProcess::TerminalHit(node, depth, collision_limit);
+       } else {
+         return NodeToProcess::Extension(node, depth);
+@@ -892,8 +919,8 @@ SearchWorker::NodeToProcess SearchWorker::PickNodeToExtend(
+         // best_move_node_ could have changed since best_node_n was retrieved.
+         // To ensure we have at least one node to expand, always include
+         // current best node.
+-        if (child != search_->current_best_edge_ &&
+-            search_->remaining_playouts_ < best_node_n - child.GetN()) {
++        if (child != strong->current_best_edge_ &&
++            strong->remaining_playouts_ < best_node_n - child.GetN()) {
+           continue;
+         }
+         // If root move filter exists, make sure move is in the list.
+@@ -931,11 +958,11 @@ SearchWorker::NodeToProcess SearchWorker::PickNodeToExtend(
+       second_best_edge.Reset();
+     }
+ 
+-    if (is_root_node && possible_moves <= 1 && !search_->limits_.infinite) {
++    if (is_root_node && possible_moves <= 1 && !strong->limits_.infinite) {
+       // If there is only one move theoretically possible within remaining time,
+       // output it.
+-      Mutex::Lock counters_lock(search_->counters_mutex_);
+-      search_->only_one_possible_move_left_ = true;
++      Mutex::Lock counters_lock(strong->counters_mutex_);
++      strong->only_one_possible_move_left_ = true;
+     }
+     is_root_node = false;
+   }
+@@ -943,13 +970,14 @@ SearchWorker::NodeToProcess SearchWorker::PickNodeToExtend(
+ 
+ void SearchWorker::ExtendNode(Node* node) {
+   // Initialize position sequence with pre-move position.
+-  history_.Trim(search_->played_history_.GetLength());
++    auto strong = search_.lock();
++  history_.Trim(strong->played_history_.GetLength());
+   std::vector<Move> to_add;
+   // Could instead reserve one more than the difference between history_.size()
+   // and history_.capacity().
+   to_add.reserve(60);
+   Node* cur = node;
+-  while (cur != search_->root_node_) {
++  while (cur != strong->root_node_) {
+     Node* prev = cur->GetParent();
+     to_add.push_back(prev->GetEdgeToNode(cur)->GetMove());
+     cur = prev;
+@@ -977,7 +1005,7 @@ void SearchWorker::ExtendNode(Node* node) {
+ 
+   // We can shortcircuit these draws-by-rule only if they aren't root;
+   // if they are root, then thinking about them is the point.
+-  if (node != search_->root_node_) {
++  if (node != strong->root_node_) {
+     if (!board.HasMatingMaterial()) {
+       node->MakeTerminal(GameResult::DRAW);
+       return;
+@@ -994,12 +1022,14 @@ void SearchWorker::ExtendNode(Node* node) {
+     }
+ 
+     // Neither by-position or by-rule termination, but maybe it's a TB position.
+-    if (search_->syzygy_tb_ && board.castlings().no_legal_castle() &&
++    if (strong->syzygy_tb_ && board.castlings().no_legal_castle() &&
+         history_.Last().GetNoCaptureNoPawnPly() == 0 &&
+         (board.ours() + board.theirs()).count() <=
+-            search_->syzygy_tb_->max_cardinality()) {
++            strong->syzygy_tb_->max_cardinality()) {
+       ProbeState state;
+-      WDLScore wdl = search_->syzygy_tb_->probe_wdl(history_.Last(), &state);
++        auto strong = search_.lock();
++
++      WDLScore wdl = strong->syzygy_tb_->probe_wdl(history_.Last(), &state);
+       // Only fail state means the WDL is wrong, probe_wdl may produce correct
+       // result with a stat other than OK.
+       if (state != FAIL) {
+@@ -1011,7 +1041,7 @@ void SearchWorker::ExtendNode(Node* node) {
+         } else {  // Cursed wins and blessed losses count as draws.
+           node->MakeTerminal(GameResult::DRAW);
+         }
+-        search_->tb_hits_.fetch_add(1, std::memory_order_acq_rel);
++        strong->tb_hits_.fetch_add(1, std::memory_order_acq_rel);
+         return;
+       }
+     }
+@@ -1028,7 +1058,9 @@ bool SearchWorker::AddNodeToComputation(Node* node, bool add_if_cached) {
+   if (add_if_cached) {
+     if (computation_->AddInputByHash(hash)) return true;
+   } else {
+-    if (search_->cache_->ContainsKey(hash)) return true;
++      auto strong = search_.lock();
++
++    if (strong->cache_->ContainsKey(hash)) return true;
+   }
+   auto planes = EncodePositionForNN(history_, 8, params_.GetHistoryFill());
+ 
+@@ -1061,12 +1093,13 @@ void SearchWorker::MaybePrefetchIntoCache() {
+   // TODO(mooskagh) Remove prefetch into cache if node collisions work well.
+   // If there are requests to NN, but the batch is not full, try to prefetch
+   // nodes which are likely useful in future.
+-  if (search_->stop_.load(std::memory_order_acquire)) return;
++    auto strong = search_.lock();
++  if (strong->stop_.load(std::memory_order_acquire)) return;
+   if (computation_->GetCacheMisses() > 0 &&
+       computation_->GetCacheMisses() < params_.GetMaxPrefetchBatch()) {
+-    history_.Trim(search_->played_history_.GetLength());
+-    SharedMutex::SharedLock lock(search_->nodes_mutex_);
+-    PrefetchIntoCache(search_->root_node_, params_.GetMaxPrefetchBatch() -
++    history_.Trim(strong->played_history_.GetLength());
++    SharedMutex::SharedLock lock(strong->nodes_mutex_);
++    PrefetchIntoCache(strong->root_node_, params_.GetMaxPrefetchBatch() -
+                                                computation_->GetCacheMisses());
+   }
+ }
+@@ -1099,7 +1132,8 @@ int SearchWorker::PrefetchIntoCache(Node* node, int budget) {
+   std::vector<ScoredEdge> scores;
+   const float cpuct = ComputeCpuct(params_, node->GetN());
+   float puct_mult = cpuct * std::sqrt(std::max(node->GetChildrenVisits(), 1u));
+-  const float fpu = GetFpu(params_, node, node == search_->root_node_);
++    auto strong = search_.lock();
++  const float fpu = GetFpu(params_, node, node == strong->root_node_);
+   for (auto edge : node->Edges()) {
+     if (edge.GetP() == 0.0f) continue;
+     // Flip the sign of a score to be able to easily sort.
+@@ -1111,7 +1145,7 @@ int SearchWorker::PrefetchIntoCache(Node* node, int budget) {
+   int budget_to_spend = budget;  // Initialize for the case where there's only
+                                  // one child.
+   for (size_t i = 0; i < scores.size(); ++i) {
+-    if (search_->stop_.load(std::memory_order_acquire)) break;
++    if (strong->stop_.load(std::memory_order_acquire)) break;
+     if (budget <= 0) break;
+ 
+     // Sort next chunk of a vector. 3 at a time. Most of the time it's fine.
+@@ -1200,7 +1234,8 @@ void SearchWorker::FetchSingleNodeResult(NodeToProcess* node_to_process,
+     for (auto edge : node->Edges()) edge.edge()->SetP(edge.GetP() * scale);
+   }
+   // Add Dirichlet noise if enabled and at root.
+-  if (params_.GetNoise() && node == search_->root_node_) {
++    auto strong = search_.lock();
++  if (params_.GetNoise() && node == strong->root_node_) {
+     ApplyDirichletNoise(node, 0.25, 0.3);
+   }
+ }
+@@ -1209,19 +1244,20 @@ void SearchWorker::FetchSingleNodeResult(NodeToProcess* node_to_process,
+ // ~~~~~~~~~~~~~~
+ void SearchWorker::DoBackupUpdate() {
+   // Nodes mutex for doing node updates.
+-  SharedMutex::Lock lock(search_->nodes_mutex_);
++    auto strong = search_.lock();
++  SharedMutex::Lock lock(strong->nodes_mutex_);
+ 
+   for (const NodeToProcess& node_to_process : minibatch_) {
+     DoBackupUpdateSingleNode(node_to_process);
+   }
+ }
+ 
+-void SearchWorker::DoBackupUpdateSingleNode(
+-    const NodeToProcess& node_to_process) REQUIRES(search_->nodes_mutex_) {
++void SearchWorker::DoBackupUpdateSingleNode(const NodeToProcess& node_to_process) REQUIRES(search_.lock()->nodes_mutex_) {
+   Node* node = node_to_process.node;
++    auto strong = search_.lock();
+   if (node_to_process.IsCollision()) {
+     // If it was a collision, just undo counters.
+-    for (node = node->GetParent(); node != search_->root_node_->GetParent();
++    for (node = node->GetParent(); node != strong->root_node_->GetParent();
+          node = node->GetParent()) {
+       node->CancelScoreUpdate(node_to_process.multivisit);
+     }
+@@ -1230,7 +1266,7 @@ void SearchWorker::DoBackupUpdateSingleNode(
+ 
+   // Backup V value up to a root. After 1 visit, V = Q.
+   float v = node_to_process.v;
+-  for (Node* n = node; n != search_->root_node_->GetParent();
++  for (Node* n = node; n != strong->root_node_->GetParent();
+        n = n->GetParent()) {
+     n->FinalizeScoreUpdate(v, node_to_process.multivisit);
+     // Q will be flipped for opponent.
+@@ -1238,23 +1274,24 @@ void SearchWorker::DoBackupUpdateSingleNode(
+ 
+     // Update the stats.
+     // Best move.
+-    if (n->GetParent() == search_->root_node_ &&
+-        search_->current_best_edge_.GetN() <= n->GetN()) {
+-      search_->current_best_edge_ =
+-          search_->GetBestChildNoTemperature(search_->root_node_);
++    if (n->GetParent() == strong->root_node_ &&
++        strong->current_best_edge_.GetN() <= n->GetN()) {
++      strong->current_best_edge_ =
++          strong->GetBestChildNoTemperature(strong->root_node_);
+     }
+   }
+-  search_->total_playouts_ += node_to_process.multivisit;
+-  search_->cum_depth_ += node_to_process.depth * node_to_process.multivisit;
+-  search_->max_depth_ = std::max(search_->max_depth_, node_to_process.depth);
++  strong->total_playouts_ += node_to_process.multivisit;
++  strong->cum_depth_ += node_to_process.depth * node_to_process.multivisit;
++  strong->max_depth_ = std::max(strong->max_depth_, node_to_process.depth);
+ }  // namespace lczero
+ 
+ // 7. Update the Search's status and progress information.
+ //~~~~~~~~~~~~~~~~~~~~
+ void SearchWorker::UpdateCounters() {
+-  search_->UpdateRemainingMoves();  // Updates smart pruning counters.
+-  search_->MaybeTriggerStop();
+-  search_->MaybeOutputInfo();
++    auto strong = search_.lock();
++  strong->UpdateRemainingMoves();  // Updates smart pruning counters.
++  strong->MaybeTriggerStop();
++  strong->MaybeOutputInfo();
+ 
+   // If this thread had no work, not even out of order, then sleep for some
+   // milliseconds. Collisions don't count as work, so have to enumerate to find
+diff --git a/src/mcts/search.h b/src/mcts/search.h
+index 14b5bcd..8eb98d3 100644
+--- a/src/mcts/search.h
++++ b/src/mcts/search.h
+@@ -56,7 +56,7 @@ struct SearchLimits {
+   std::string DebugString() const;
+ };
+ 
+-class Search {
++class Search: public std::enable_shared_from_this<Search> {
+  public:
+   Search(const NodeTree& tree, Network* network,
+          BestMoveInfo::Callback best_move_callback,
+@@ -65,7 +65,7 @@ class Search {
+          SyzygyTablebase* syzygy_tb);
+ 
+   ~Search();
+-
++    
+   // Starts worker threads and returns immediately.
+   void StartThreads(size_t how_many);
+ 
+@@ -98,7 +98,10 @@ class Search {
+  private:
+   // Computes the best move, maybe with temperature (according to the settings).
+   void EnsureBestMoveKnown();
+-
++  std::thread CreateWorkerThread();
++  std::thread CreateWatchdogThread();
++  std::function<int ()> CreateTimeoutFunction();
++    
+   // Returns a child with most visits, with or without temperature.
+   // NoTemperature is safe to use on non-extended nodes, while WithTemperature
+   // accepts only nodes with at least 1 visited child.
+@@ -192,17 +195,20 @@ class Search {
+ // within one thread, have to split into stages.
+ class SearchWorker {
+  public:
+-  SearchWorker(Search* search, const SearchParams& params)
+-      : search_(search), history_(search_->played_history_), params_(params) {}
++  SearchWorker(std::weak_ptr<Search> search, const PositionHistory& history, const SearchParams& params)
++      : search_(search), history_(history), params_(params) {}
+ 
+   // Runs iterations while needed.
+   void RunBlocking() {
+     LOGFILE << "Started search thread.";
+     // A very early stop may arrive before this point, so the test is at the end
+     // to ensure at least one iteration runs before exiting.
++    bool isSearchActive = true;
+     do {
+       ExecuteOneIteration();
+-    } while (search_->IsSearchActive());
++      auto strong = search_.lock();
++      isSearchActive = strong->IsSearchActive();
++    } while (isSearchActive);
+   }
+ 
+   // Does one full iteration of MCTS search:
+@@ -284,7 +290,7 @@ class SearchWorker {
+                              int idx_in_computation);
+   void DoBackupUpdateSingleNode(const NodeToProcess& node_to_process);
+ 
+-  Search* const search_;
++  std::weak_ptr<Search> search_;
+   // List of nodes to process.
+   std::vector<NodeToProcess> minibatch_;
+   std::unique_ptr<CachingComputation> computation_;
 diff --git a/src/neural/encoder.cc b/src/neural/encoder.cc
 index 77e9a51..7a5f52c 100644
 --- a/src/neural/encoder.cc
@@ -37,6 +522,17 @@ index 19669a2..971af2e 100644
  
  // Encodes the last position in history for the neural network request.
  InputPlanes EncodePositionForNN(const PositionHistory& history,
+diff --git a/src/utils/logging.cc b/src/utils/logging.cc
+index 1db2098..c57a884 100644
+--- a/src/utils/logging.cc
++++ b/src/utils/logging.cc
+@@ -103,4 +103,4 @@ std::string FormatTime(
+   return ss.str();
+ }
+ 
+-}  // namespace lczero
+\ No newline at end of file
++}  // namespace lczero
 diff --git a/src/utils/weights_adapter.cc b/src/utils/weights_adapter.cc
 index ea54fa3..9e50e26 100644
 --- a/src/utils/weights_adapter.cc
