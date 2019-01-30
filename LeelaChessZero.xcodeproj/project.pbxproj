@@ -203,7 +203,6 @@
 		CDF5920321DDD8900083E58B /* version.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; name = version.inc; path = submodules/lc0/src/version.inc; sourceTree = "<group>"; };
 		CDF5920421DDD8900083E58B /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = version.h; path = submodules/lc0/src/version.h; sourceTree = "<group>"; };
 		CDF5928E21DDDE980083E58B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		CDF5929421DDF3920083E58B /* libprotobuf.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libprotobuf.a; sourceTree = "<group>"; };
 		CDF5929B21DDFCD10083E58B /* net.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = net.pb.cc; sourceTree = "<group>"; };
 		CDF5929C21DDFCD10083E58B /* net.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = net.pb.h; sourceTree = "<group>"; };
 		CDF592A121DED9540083E58B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -478,7 +477,6 @@
 			children = (
 				CDB1407C21E15D420090572B /* libprotobuf-lite.a */,
 				CDF592A121DED9540083E58B /* Accelerate.framework */,
-				CDF5929421DDF3920083E58B /* libprotobuf.a */,
 				CDF5928E21DDDE980083E58B /* libz.tbd */,
 			);
 			name = Frameworks;
